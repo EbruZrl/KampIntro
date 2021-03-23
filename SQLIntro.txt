@@ -1,0 +1,37 @@
+--Select
+--ANSII
+Select ContactName Adi,CompanyName SirketAdi,City Sehir from Customers
+Select * from Customers where City ='Berlin'
+
+--case insensitive
+Select * from Products where CategoryID= 1 OR CategoryID=3
+
+select * from Products where CategoryID= 1 and UnitPrice>=10
+
+select * from Products order by UnitPrice asc --ascending
+select * from Products order by UnitPrice desc --decending
+
+select * from Products where CategoryID=1 order by UnitPrice desc --1.ýdde olanlarý fiyatý azalana göre sýrala
+
+Select count(*) from Products --productta kaç ürün var
+
+select count(*) Adet from Products
+select categoryID, count(*) from Products group by CategoryID 
+select categoryID, count(*) from Products group by CategoryID having count(*)<10
+
+select categoryID, count() from products where UnitPrice>20 group by CategoryID having count(*)<10
+
+select Products.ProductID, Products.ProductName, Products.UnitPrice, Categories.CategoryName
+from Products inner join Categories
+on Products.CategoryID = Categories.CategoryID
+
+--DTO Data Transformation object
+
+Select * from Products inner join [Order Details] od --left olunca solda olup saðda olmayanlarý da getir yani satýþý olmayanlarý da getir demek
+on p.ProductID = od.ProductID --inner iki grueþleþen kayýtlarý getirir yçnetim satamadýðýmýz ürünü isterse left kullanýlmalý
+inner join Orders o
+on o.OrderID = od.OrderID
+
+Select * from Customers c left join Orders o
+on c.CustomerID = o.CustomerID
+where o.CustomerID is null --sana özel indirim bu sayede oluyor. Kayýt yaptýrýp ürün almamýþ.
