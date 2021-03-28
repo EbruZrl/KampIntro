@@ -20,3 +20,18 @@ select categoryID, count(*) from Products group by CategoryID
 select categoryID, count(*) from Products group by CategoryID having count(*)<10
 
 select categoryID, count() from products where UnitPrice>20 group by CategoryID having count(*)<10
+
+select Products.ProductID, Products.ProductName, Products.UnitPrice, Categories.CategoryName
+from Products inner join Categories
+on Products.CategoryID = Categories.CategoryID
+
+--DTO Data Transformation object
+
+Select * from Products inner join [Order Details] od --left olunca solda olup sağda olmayanları da getir yani satışı olmayanları da getir demek
+on p.ProductID = od.ProductID --inner iki grueşleşen kayıtları getirir yçnetim satamadığımız ürünü isterse left kullanılmalı
+inner join Orders o
+on o.OrderID = od.OrderID
+
+Select * from Customers c left join Orders o
+on c.CustomerID = o.CustomerID
+where o.CustomerID is null --sana özel indirim bu sayede oluyor. Kayıt yaptırıp ürün almamış.
